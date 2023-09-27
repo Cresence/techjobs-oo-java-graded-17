@@ -52,7 +52,7 @@ public class Job {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(getId());
     }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
