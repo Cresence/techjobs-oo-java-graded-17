@@ -44,7 +44,9 @@ public class Job {
         if (getClass() != comparedObj.getClass()) return false;
 
         // Return for more comparison after Getters/Setters added
-        return true;
+        Job testJob = (Job) comparedObj;
+        boolean b = testJob.getId() == getId();
+        return b;
 
     }
 
