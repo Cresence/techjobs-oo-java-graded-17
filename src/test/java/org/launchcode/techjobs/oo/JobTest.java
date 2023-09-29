@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("ALL")
 public class JobTest {
     //TODO: Create your unit tests here
     Job testEntry;
@@ -101,14 +102,51 @@ public class JobTest {
 
         Job testEntryToo = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        assertEquals(testEntry.getName(), testEntryToo.getName());
-        assertEquals(testEntry.getName(), testEntryToo.getName());
-        assertEquals(testEntry.getName(), testEntryToo.getName());
-        assertEquals(testEntry.getName(), testEntryToo.getName());
-        assertEquals(testEntry.getName(), testEntryToo.getName());
+        assertEquals(testEntry.getName().toString(), testEntryToo.getName().toString());
+        assertEquals(testEntry.getEmployer().toString(), testEntryToo.getEmployer().toString());
+        assertEquals(testEntry.getLocation().toString(), testEntryToo.getLocation().toString());
+        assertEquals(testEntry.getPositionType().toString(), testEntryToo.getPositionType().toString());
+        assertEquals(testEntry.getCoreCompetency().toString(), testEntryToo.getCoreCompetency().toString());
         boolean testActual = testEntry.getId() == testEntryToo.getId();
         assertFalse(testActual);
 
+    }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        setUpJobTest();
+
+        String newline = System.lineSeparator();
+        String testStr = testEntry.toString();
+
+        assertTrue(testStr.startsWith(newline) && testStr.endsWith(newline));
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        setUpJobTest();
+
+        int matchCount = 0;
+        String newline = System.lineSeparator();
+        String testJobString = testEntry.toString();
+
+        for (String labelAndData : testJobString.split(newline)) {
+            if (labelAndData.equals("ID: " + testEntry.getId())) {matchCount++;}
+            if (labelAndData.equals("Name: " + testEntry.getName())) {matchCount++;}
+            if (labelAndData.equals("Employer: " + testEntry.getEmployer())) {matchCount++;}
+            if (labelAndData.equals("Location: " + testEntry.getLocation())) {matchCount++;}
+            if (labelAndData.equals("Position Type: " + testEntry.getPositionType())) {matchCount++;}
+            if (labelAndData.equals("Core Competency: " + testEntry.getCoreCompetency())) {matchCount++;}
+        }
+
+        assertEquals(6, matchCount);
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job emptyTestEntry = new Job(null, new Employer(null), new Location(null), new PositionType(null), new CoreCompetency(null));
+
+        assertEquals("OOPS! This job does not seem to exist.", emptyTestEntry.toString());
     }
 
 
