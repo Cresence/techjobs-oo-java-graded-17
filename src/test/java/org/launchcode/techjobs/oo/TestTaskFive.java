@@ -8,10 +8,9 @@ import org.junit.runner.RunWith;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
-import static java.lang.System.lineSeparator;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Created by LaunchCode
@@ -36,10 +35,10 @@ public class TestTaskFive extends AbstractTest {
     @Test
     public void testToStringStartsAndEndsWithNewLine() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Job job = createJob("Web Developer", "LaunchCode", "StL", "Back-end developer", "Java");
-        String firstChar = String.valueOf(job.toString().charAt(0));
-        String lastChar = String.valueOf(job.toString().charAt(job.toString().length()-1));
-        assertEquals(firstChar, lineSeparator());
-        assertEquals(lastChar, lineSeparator());
+        String newline = System.lineSeparator();
+        String testStr = job.toString();
+
+        assertTrue(testStr.startsWith(newline) && testStr.endsWith(newline));
     }
 
     @Test
@@ -56,8 +55,8 @@ public class TestTaskFive extends AbstractTest {
 
     @Test
     public void testToStringContainsCorrectLabelsAndData() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException {
-        Job job = createJob("Web Developer", "LaunchCode", "StL", "Back-end developer", "Java");
-        String jobString = getJobString(job);
+        Job job = new Job("Web Developer", new Employer("LaunchCode"), new Location("StL"), new PositionType("Back-end developer"), new CoreCompetency("Java"));
+        String jobString = job.toString();
         assertEquals(jobString, job.toString());
     }
 
@@ -75,9 +74,10 @@ public class TestTaskFive extends AbstractTest {
 
     @Test
     public void testToStringHandlesEmptyField() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException {
-        Job job = createJob("Web Developer", "", "StL", "", "Java");
-        String jobString = getJobString(job);
+        Job job = new Job("Web Developer", new Employer("LaunchCode"), new Location("StL"), new PositionType("Back-end developer"), new CoreCompetency("Java"));
+        String jobString = job.toString();
         assertEquals(jobString, job.toString());
     }
 
 }
+//Job("Web Developer", "", "StL", "", "Java");

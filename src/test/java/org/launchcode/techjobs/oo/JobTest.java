@@ -131,12 +131,12 @@ public class JobTest {
         String testJobString = testEntry.toString();
 
         for (String labelAndData : testJobString.split(newline)) {
-            if (labelAndData.equals("ID: " + testEntry.getId())) {matchCount++;}
-            if (labelAndData.equals("Name: " + testEntry.getName())) {matchCount++;}
-            if (labelAndData.equals("Employer: " + testEntry.getEmployer())) {matchCount++;}
-            if (labelAndData.equals("Location: " + testEntry.getLocation())) {matchCount++;}
-            if (labelAndData.equals("Position Type: " + testEntry.getPositionType())) {matchCount++;}
-            if (labelAndData.equals("Core Competency: " + testEntry.getCoreCompetency())) {matchCount++;}
+            if (labelAndData.equals("ID:" + " " + testEntry.getId())) {matchCount++;}
+            if (labelAndData.equals("Name:" + " " + testEntry.getName())) {matchCount++;}
+            if (labelAndData.equals("Employer:" + " " + testEntry.getEmployer())) {matchCount++;}
+            if (labelAndData.equals("Location:" + " " + testEntry.getLocation())) {matchCount++;}
+            if (labelAndData.equals("Position Type:" + " " + testEntry.getPositionType())) {matchCount++;}
+            if (labelAndData.equals("Core Competency:" + " " + testEntry.getCoreCompetency())) {matchCount++;}
         }
 
         assertEquals(6, matchCount);

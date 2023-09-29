@@ -65,27 +65,31 @@ public class Job {
     public String toString() {
         // name, employer, location, positionType, coreCompetency
 
+            String noDataStr = "Data not available";
+            if (name == null || name.isEmpty()) {name = noDataStr;}
 
-            if (name == null || name.isEmpty()) {name = "Data not available";}
+            if ((employer.getValue()) == null || (employer.getValue()).isEmpty()) {employer.setValue(noDataStr);}
 
-            if ((employer.getValue()) == null || (employer.getValue()).isEmpty()) {employer.setValue("Data not available");}
+            if ((location.getValue()) == null || (location.getValue()).isEmpty()) {location.setValue(noDataStr);}
 
-            if ((location.getValue()) == null || (location.getValue()).isEmpty()) {location.setValue("Data not available");}
+            if ((positionType.getValue()) == null || (positionType.getValue()).isEmpty()) {positionType.setValue(noDataStr);}
 
-            if ((positionType.getValue()) == null || (positionType.getValue()).isEmpty()) {positionType.setValue("Data not available");}
+            if ((coreCompetency.getValue()) == null || (coreCompetency.getValue()).isEmpty()) {coreCompetency.setValue(noDataStr);}
 
-            if ((coreCompetency.getValue()) == null || (coreCompetency.getValue()).isEmpty()) {coreCompetency.setValue("Data not available");}
+        if ((name.equals(noDataStr)) && (positionType.toString().equals(noDataStr))) {
+            return "OOPS! This job does not seem to exist.";
+        }
+        else {
+            return System.lineSeparator()+
+                    "ID:" + " " + id + System.lineSeparator()+
+                    "Name:" + " " + name + System.lineSeparator()+
+                    "Employer:" + " " + employer + System.lineSeparator()+
+                    "Location:" + " " + location + System.lineSeparator()+
+                    "Position Type:" + " " + positionType + System.lineSeparator()+
+                    "Core Competency:" + " " + coreCompetency + System.lineSeparator();
+        }
 
-        if (!(name == null) && !(location == null) && !(coreCompetency == null)) {
-            return System.lineSeparator() +
-                    "ID: " + id + System.lineSeparator() +
-                    "Name: " + name + System.lineSeparator() +
-                    "Employer: " + employer + System.lineSeparator() +
-                    "Location: " + location + System.lineSeparator() +
-                    "Position Type: " + positionType + System.lineSeparator() +
-                    "Core Competency: " + coreCompetency +
-                    System.lineSeparator(); }
-        else { return "OOPS! This job does not seem to exist."; }
+
     }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
